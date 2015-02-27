@@ -3,12 +3,13 @@
 #
 
 # Name of your site (displayed in the header)
-name: Namoosori’s home blog
+name: Your Name
 
 # Short bio or description (displayed in the header)
-description: One step Ahead     
+description: Web Developer from Somewhere
+
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://raw.githubusercontent.com/Wooseok7/theme12/gh-pages/Nextree%20CI_enlarge.png
+avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png
 
 #
 # Flags below are optional
@@ -22,13 +23,13 @@ footer-links:
   email: 
   facebook: 
   flickr: 
-  github: wooseok7/theme12
+  github: barryclark/jekyll-now
   instagram: 
   linkedin: 
   pinterest: 
   rss: # just type anything here for a working RSS icon, make sure you set the "url" above!
-  twitter: 
-  stackoverflow: 
+  twitter: jekyllrb
+  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
 
 # Your disqus shortname, entering this will enable commenting on posts
 disqus: 
@@ -36,17 +37,17 @@ disqus:
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics: 
 
-# 
+# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url: http://wooseok7.github.io/
+url: 
 
 # If you're hosting your site at a Project repository on GitHub pages 
 # (http://yourusername.github.io/repository-name)
 # and NOT your User repository (http://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
-baseurl: "/theme12"
+baseurl: ""
 
-#l
+#
 # !! You don't need to change any of the configuration flags below !!
 #
 
@@ -86,4 +87,4 @@ exclude:
     - LICENSE
     - README.md
 
-paginate: 6
+paginate: 4

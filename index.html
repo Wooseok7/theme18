@@ -9,12 +9,10 @@ layout: default
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
       <div class="entry">
-        {{ post.content | strip_html | truncatewords:100}}
+        {{ post.content | strip_html | truncatewords:40}}
       </div>
       
-      <p style="text-align:right">
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Continue treeing</a>
-    
+      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">더 읽기</a>
     </article>
   {% endfor %}
 </div>
@@ -23,9 +21,9 @@ layout: default
 {% if paginator.total_pages > 1 %}
 <div class="pagination">
   {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; PREV</a>
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; 이전</a>
   {% else %}
-    <span>&laquo; PREV</span>
+    <span>&laquo; 이전</span>
   {% endif %}
 
   {% for page in (1..paginator.total_pages) %}
@@ -39,9 +37,9 @@ layout: default
   {% endfor %}
 
   {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">NEXT &raquo;</a>
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">다음 &raquo;</a>
   {% else %}
-    <span>NEXT &raquo;</span>
+    <span>다음 &raquo;</span>
   {% endif %}
 </div>
 {% endif %}
