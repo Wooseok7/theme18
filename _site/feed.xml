@@ -3,8 +3,8 @@
   <channel>
     <title></title>
     <description></description>
-    <link></link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://wooseok7.github.io/theme18</link>
+    <atom:link href="http://wooseok7.github.io/theme18/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>Embed YouTube video responsively test</title>
@@ -13,8 +13,8 @@
 &lt;p&gt;반응형으로 영상이 잘 삽입되는지 확인하는 글입니다. 창의 크기를 마음껏 늘였다가 줄여도 영상이 잘 보여야 합니다. 만약 영상의 일부분이 잘리면 실패입니다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Dec 2014 00:00:00 +0900</pubDate>
-        <link>/embed-video-responsively/</link>
-        <guid isPermaLink="true">/embed-video-responsively/</guid>
+        <link>http://wooseok7.github.io/theme18/embed-video-responsively/</link>
+        <guid isPermaLink="true">http://wooseok7.github.io/theme18/embed-video-responsively/</guid>
       </item>
     
       <item>
@@ -389,8 +389,8 @@ int main(int argc, _TCHAR* argv[])
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 15 Aug 2014 00:00:00 +0900</pubDate>
-        <link>/Java%20enum/</link>
-        <guid isPermaLink="true">/Java%20enum/</guid>
+        <link>http://wooseok7.github.io/theme18/Java%20enum/</link>
+        <guid isPermaLink="true">http://wooseok7.github.io/theme18/Java%20enum/</guid>
       </item>
     
       <item>
@@ -638,8 +638,8 @@ function sortByKey(array, key) {
 &lt;p&gt;&lt;em&gt;Posted by 김 영진 in 배움터 - 열공, 일터 - 경험과 노하우 on Aug 10th, 2014&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 10 Aug 2014 00:00:00 +0900</pubDate>
-        <link>/jQuery/</link>
-        <guid isPermaLink="true">/jQuery/</guid>
+        <link>http://wooseok7.github.io/theme18/jQuery/</link>
+        <guid isPermaLink="true">http://wooseok7.github.io/theme18/jQuery/</guid>
       </item>
     
       <item>
@@ -773,8 +773,8 @@ CXF vs AXIS vs Spring-WS (&lt;a href=&quot;http://architects.dzone.com/articles/
 CXF 샘플 코드 (&lt;a href=&quot;https://github.com/kronleuchter85/cxf-samples/blob/master/java_first_spring_support/pom.xml&quot;&gt;https://github.com/kronleuchter85/cxf-samples/blob/master/java_first_spring_support/pom.xml&lt;/a&gt;)&lt;/p&gt;
 </description>
         <pubDate>Sun, 10 Aug 2014 00:00:00 +0900</pubDate>
-        <link>/cxf/</link>
-        <guid isPermaLink="true">/cxf/</guid>
+        <link>http://wooseok7.github.io/theme18/cxf/</link>
+        <guid isPermaLink="true">http://wooseok7.github.io/theme18/cxf/</guid>
       </item>
     
       <item>
@@ -1041,8 +1041,8 @@ public ModelAndView AjaxView( @RequestParam(&amp;quot;id&amp;quot;) String id)  
 &lt;p&gt;&lt;a href=&quot;http://a07274.tistory.com/209&quot;&gt;http://a07274.tistory.com/209&lt;/a&gt; - jsonView&lt;/p&gt;
 </description>
         <pubDate>Sun, 10 Aug 2014 00:00:00 +0900</pubDate>
-        <link>/Spring%20mvc%20Ajax%20Json/</link>
-        <guid isPermaLink="true">/Spring%20mvc%20Ajax%20Json/</guid>
+        <link>http://wooseok7.github.io/theme18/Spring%20mvc%20Ajax%20Json/</link>
+        <guid isPermaLink="true">http://wooseok7.github.io/theme18/Spring%20mvc%20Ajax%20Json/</guid>
       </item>
     
       <item>
@@ -1054,8 +1054,8 @@ public ModelAndView AjaxView( @RequestParam(&amp;quot;id&amp;quot;) String id)  
 &lt;p&gt;The easiest way to make your first post is to edit this one. Go into /_posts/ and update the Hello World markdown file. For more instructions head over to the &lt;a href=&quot;https://github.com/barryclark/jekyll-now&quot;&gt;Jekyll Now repository&lt;/a&gt; on GitHub.&lt;/p&gt;
 </description>
         <pubDate>Mon, 03 Mar 2014 00:00:00 +0900</pubDate>
-        <link>/Hello-World/</link>
-        <guid isPermaLink="true">/Hello-World/</guid>
+        <link>http://wooseok7.github.io/theme18/Hello-World/</link>
+        <guid isPermaLink="true">http://wooseok7.github.io/theme18/Hello-World/</guid>
       </item>
     
   </channel>

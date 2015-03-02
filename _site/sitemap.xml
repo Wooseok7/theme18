@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/embed-video-responsively/</loc>
+    <loc>http://wooseok7.github.io/theme18/embed-video-responsively/</loc>
     <lastmod>2014-12-24T00:00:00+09:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/Java%20enum/</loc>
+    <loc>http://wooseok7.github.io/theme18/Java%20enum/</loc>
     <lastmod>2014-08-15T00:00:00+09:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/jQuery/</loc>
+    <loc>http://wooseok7.github.io/theme18/jQuery/</loc>
     <lastmod>2014-08-10T00:00:00+09:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/cxf/</loc>
+    <loc>http://wooseok7.github.io/theme18/cxf/</loc>
     <lastmod>2014-08-10T00:00:00+09:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/Spring%20mvc%20Ajax%20Json/</loc>
+    <loc>http://wooseok7.github.io/theme18/Spring%20mvc%20Ajax%20Json/</loc>
     <lastmod>2014-08-10T00:00:00+09:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/Hello-World/</loc>
+    <loc>http://wooseok7.github.io/theme18/Hello-World/</loc>
     <lastmod>2014-03-03T00:00:00+09:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/404.html</loc>
-    <lastmod>2015-03-02T18:22:28+09:00</lastmod>
+    <loc>http://wooseok7.github.io/theme18/404.html</loc>
+    <lastmod>2015-03-02T18:39:33+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>/about/</loc>
-    <lastmod>2015-03-02T18:22:28+09:00</lastmod>
+    <loc>http://wooseok7.github.io/theme18/about/</loc>
+    <lastmod>2015-03-02T18:39:33+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>/archive/</loc>
-    <lastmod>2015-03-02T18:22:28+09:00</lastmod>
+    <loc>http://wooseok7.github.io/theme18/archive/</loc>
+    <lastmod>2015-03-02T18:39:33+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2015-03-02T18:22:28+09:00</lastmod>
+    <loc>http://wooseok7.github.io/theme18/categories/</loc>
+    <lastmod>2015-03-02T18:39:33+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>/</loc>
-    <lastmod>2015-03-02T18:22:28+09:00</lastmod>
+    <loc>http://wooseok7.github.io/theme18/</loc>
+    <lastmod>2015-03-02T18:39:33+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>/theme18/search/</loc>
-    <lastmod>2015-03-02T18:22:28+09:00</lastmod>
+    <loc>http://wooseok7.github.io/theme18/theme18/search/</loc>
+    <lastmod>2015-03-02T18:39:33+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2015-03-02T18:22:28+09:00</lastmod>
+    <loc>http://wooseok7.github.io/theme18/tags/</loc>
+    <lastmod>2015-03-02T18:39:33+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
