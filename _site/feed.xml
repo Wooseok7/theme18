@@ -1049,7 +1049,7 @@ public ModelAndView AjaxView( @RequestParam(&amp;quot;id&amp;quot;) String id)  
         <title>You&#39;re up and running!</title>
         <description>&lt;p&gt;Next you can update your site name, avatar and other options using the _config.yml file in the root of your repository (shown below &lt;img class=&#39;emoji&#39; title=&#39;:point_down:&#39; alt=&#39;:point_down:&#39; src=&#39;https://assets.github.com/images/icons/emoji/unicode/1f447.png&#39; height=&#39;20&#39; width=&#39;20&#39; align=&#39;absmiddle&#39; /&gt;).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/config.png&quot; alt=&quot;_config.yml&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/theme18/images/config.png&quot; alt=&quot;_config.yml&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;The easiest way to make your first post is to edit this one. Go into /_posts/ and update the Hello World markdown file. For more instructions head over to the &lt;a href=&quot;https://github.com/barryclark/jekyll-now&quot;&gt;Jekyll Now repository&lt;/a&gt; on GitHub.&lt;/p&gt;
 </description>
