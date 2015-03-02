@@ -13,6 +13,54 @@
 ,
   
     {
+  "title"    : "Java enum의 뿌리를 찾아서",
+  "tags"     : ["java","enum", null],
+  "href"     : "/Java%20enum/",
+  "date"     : {
+    "day"   : "15",
+    "month" : "08",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "jQuery 그리드 플러그인 jqGrid (2/2)",
+  "tags"     : ["JQuery","plugin","jqGrid", null],
+  "href"     : "/jQuery/",
+  "date"     : {
+    "day"   : "10",
+    "month" : "08",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "Spring으로 SOAP기반 CXF 웹서비스 구축하기",
+  "tags"     : ["spring","soap","cxf", null],
+  "href"     : "/cxf/",
+  "date"     : {
+    "day"   : "10",
+    "month" : "08",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "SpringMVC에서 Ajax와 JSON",
+  "tags"     : ["JSON","Ajax","SpringMVC", null],
+  "href"     : "/Spring%20mvc%20Ajax%20Json/",
+  "date"     : {
+    "day"   : "10",
+    "month" : "08",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
   "title"    : "You're up and running!",
   "tags"     : ["first","blog","post","jekyll","test", null],
   "href"     : "/Hello-World/",
