@@ -4,7 +4,11 @@ page_title: Search
 permalink: /search/
 ---
 <div id="results">
-  <h1>bbbbb<!-- `key` listing for `value` --></h1>
+
+ <script>
+  var site_base_url = '{{ site.baseurl }}';
+ </script>
+  <h1><!-- `key` listing for `value` --></h1>
   
   <ul class="results">
     <!-- results lists -->

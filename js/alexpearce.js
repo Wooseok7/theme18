@@ -154,7 +154,13 @@ $(function() {
 
   $.each(map, function(type, value) {
     if (value !== null) {
-      $.getJSON('/search.json', function(data) {
+      // 2015.03.03 fix by syhan
+          var prefix = '';
+          if (site_base_url) {
+           prefix = site_base_url;
+      }
+      //  prefix+
+      $.getJSON(prefix+ '/search.json', function(data) {
         posts = filterPostsByPropertyValue(data, type, value);
         if (posts.length === 0) {
           noResultsPage(type, value);
