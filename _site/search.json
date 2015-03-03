@@ -13,8 +13,8 @@
 ,
   
     {
-  "title"    : "Java enum의 뿌리를 찾아서",
-  "tags"     : ["java","enum", null],
+  "title"    : "Java enum의 뿌리를 찾아서…",
+  "tags"     : ["Java","enum", null],
   "href"     : "/Java%20enum/",
   "date"     : {
     "day"   : "15",
@@ -25,9 +25,9 @@
 ,
   
     {
-  "title"    : "jQuery 그리드 플러그인 jqGrid (2/2)",
-  "tags"     : ["JQuery","plugin","jqGrid", null],
-  "href"     : "/jQuery/",
+  "title"    : "jQuery=그리드 플러그인 – jqGrid (2/2)",
+  "tags"     : ["jQuery","jqGrid", null],
+  "href"     : "/jqGrid2/",
   "date"     : {
     "day"   : "10",
     "month" : "08",
@@ -50,7 +50,7 @@
   
     {
   "title"    : "SpringMVC에서 Ajax와 JSON",
-  "tags"     : ["JSON","Ajax","SpringMVC", null],
+  "tags"     : ["Spring","MVC","Ajax","JSON", null],
   "href"     : "/Spring%20mvc%20Ajax%20Json/",
   "date"     : {
     "day"   : "10",
@@ -61,12 +61,48 @@
 ,
   
     {
-  "title"    : "You're up and running!",
-  "tags"     : ["first","blog","post","jekyll","test", null],
-  "href"     : "/Hello-World/",
+  "title"    : "세 가지 DI 컨테이너로 향하는 저녁 산책",
+  "tags"     : ["DI","Container", null],
+  "href"     : "/DI/",
   "date"     : {
-    "day"   : "03",
-    "month" : "03",
+    "day"   : "06",
+    "month" : "08",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "새내기 개발자의 JUnit 여행기",
+  "tags"     : ["JUnit", null],
+  "href"     : "/JUnit/",
+  "date"     : {
+    "day"   : "30",
+    "month" : "07",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "Jquery selector",
+  "tags"     : ["jQuery selector", null],
+  "href"     : "/jQuery%20selector/",
+  "date"     : {
+    "day"   : "12",
+    "month" : "07",
+    "year"  : "2014"
+  }
+}
+,
+  
+    {
+  "title"    : "꼭 필요한 리눅스 명령어",
+  "tags"     : ["Linux 명령어", null],
+  "href"     : "/Linux/",
+  "date"     : {
+    "day"   : "12",
+    "month" : "07",
     "year"  : "2014"
   }
 }

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    <title>NamooSori</title>
+    <link rel="icon"  href="https://raw.githubusercontent.com/Wooseok7/theme20/gh-pages/Nextree%20CI_ico.ico">
+
+    <meta name="author" content="" />
+    <meta name="description" content="">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/theme18/style.css" />
+    <link rel="alternate" type="application/rss+xml" title=" - " href="/theme18/feed.xml" />
+
+
+    
+    <script type="text/javascript" src="/theme18/js/jquery-1.11.1.min.js"></script>
+    <!-- tag, category search -->
+    <script defer src="/theme18/js/alexpearce.js"></script>
+
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/theme18/" class="site-avatar"><img src="" /></a>
+          
+          <div class="site-info">
+            <h1 class="site-name"><a href="/theme18/"></a></h1>
+            <p class="site-description"></p>
+          </div>
+          
+          <nav>
+            <a href="/theme18/about/">About</a>
+            <a href="/theme18/categories">Categories</a>     
+            <a href="/theme18/archive/">Archive</a>
+            <a href="/theme18/tags/">Tags</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>꼭 필요한 리눅스 명령어</h1>
+
+  <div class="entry">
+    <p>여러 프로젝트를 진행하다보면, 리눅스 또는 유닉스를 다룰수 밖에 없는 상황이 오게 마련입니다. 그러한 상황에 직면했을때 매번 웹 검색을 하거나 그나마 몇가지 알고 있는 명령어만 가지고 반복작업을 통해 해결하곤 합니다. 그 간의 경험을 바탕으로 알고나면 단순한 반복 작업을 간단하게 해결 할 수 있는 몇가지 팁을 소개합니다.</p>
+
+<p>이 글은 현재 프로젝트에서 사용중인 CentOS Linux 기준으로 작성이 되었지만, 대부분의 리눅스에서 사용되어지는 bash셸(Bourne Again Shell) 및 공통 유틸리티에 대해서 다루므로 특정 리눅스 배포판에 관계없이 대부분 사용할 수 있습니다.</p>
+
+<p><br><br>
+대부분의 리눅스관련 서적과 같이 명령어를 정리하자면, 글이 장황해지고 포스팅으로써 분량이 맞지 않기 때문에 커맨드라인을 효과적으로 사용 할 수 있는 유틸리티를 중심으로 소개합니다.</p>
+
+<h2>1. 명령어: cd</h2>
+
+<h3>cd -</h3>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_01.png" alt="nextree"><br><br>
+위와 같이 ‘cd  -’ 를 사용하여 이전 디렉토리로 전환을 쉽게 할수 있다.</p>
+
+<p>하지만 이것의 문제점은 바로 이전의 위치만 가능하다는데 있다. 만약에 현재 위치를 기억해두고, 다른 여러디렉토리를 이동후 기억된 위치로 되돌아가고자 할때 유용하게 사용할수 있는 것이 있다.</p>
+
+<h3>pushd, popd</h3>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_02.png" alt="nextree"><br><br>
+위와 같이 ‘pushd‘ 명령어를 사용하여 현재 디렉토리 위치를 저장하고 다른디렉토리로 이동하게 된다.  그 이후  여러다른 디렉토리로 이동후에 언제라도 ‘popd‘를 사용하여 이전에 기억해둔 곳으로 전환할 수 있다.</p>
+
+<h2>2. 명령어: history</h2>
+
+<h3>!!</h3>
+
+<p>쌍느낌표(Double exclamation)  ‘!!‘ 는 바로 직전 명령어를 실행한다. 다음 예제를 보자.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_03.png" alt="nextree">   </p>
+
+<h3>!! | grep Linux</h3>
+
+<p>이 기능을 다음과 같이 쉽게 응용 할 수 있다. 이전 명령어에 쉽게 추가하기</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_04.png" alt="nextree"></p>
+
+<h3>sudo !!</h3>
+
+<p>다음과 같이 root 권한 명령어인데 ‘sudo’ 없이 사용한 명령어를 쉽게 불러와 사용할수 있다. 이는 방향키를 올려서 이전 명령어를 불러 오고 다시 앞쪽으로 이동하여 에디트하는 번거로움을 피할수 있다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_05.png" alt="nextree"></p>
+
+<h3>echo !! &gt; script.sh</h3>
+
+<p>가끔 출력 결과를 파일이나 스크립트로 저장할 필요가 있을때가 있다. 이런 경우  ‘!!‘를 사용하여 반복을 피할 수 있다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_06.png" alt="nextree"></p>
+
+<p>지금까지 ‘!!‘에 대해서 알아보았다. 하지만 ‘!‘의 기능은 조금 다른데, 이는 명령어 이력번호를 호출하는데 사용된다. 다음 예제를 보자.</p>
+
+<h3>!이력번호</h3>
+
+<p>history</p>
+
+<p>이 명령어를 치면 아래와 같이 이전 명령어들이 각각 고유 식별번호가 존재하는데, 그 식별번호를 사용하여 재 사용이 가능하다. 다음 예제를 보자.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_07.png" alt="nextree"></p>
+
+<p>!1093</p>
+
+<p>이 명령어는 1093번 명령어를 재실행한다.<br></p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_08.png" alt="nextree"></p>
+
+<h3>!-이력상대순번</h3>
+
+<p>마지막 명령어로 부터 뒤로 두번째 명령어를 재호출할때  !-2  이렇게 사용하면 된다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_09.png" alt="nextree"></p>
+
+<h3>이전 명령어의 argument로 명령어 실행</h3>
+
+<p>사실 이건 알아도 자주 안써서 기억 할 수 없기 때문에 거 의 사용 하지 못한다..</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_10.png" alt="nextree"></p>
+
+<p>그 외 다음과 같다.</p>
+
+<p>!^ 이전 명령어의 첫번째 argument이다.</p>
+
+<p>!$ 이전 명령어의 마지막 argument이다.</p>
+
+<p>!* 이전 명령어의 전체 argument가 있다.</p>
+
+<p>다음과 같이 응용도 가능하다, 바로 이전의 인수가 아닌 특정 명령어의 인수를 사용할 수 있다.</p>
+
+<p>$ ls !ls:2</p>
+
+<h3>‘![keyword]‘ 이전 명령어의 keyword로 명령어 실행</h3>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_11.png" alt="nextree"></p>
+
+<p>!ls  ls로 시작되는 명령어중 가장 최근 명령어를 찾아서 재 실행한다. (IBM AIX 등의 korn셸에서는  r  ls  )</p>
+
+<h3>vi 모드</h3>
+
+<p>커맨드 라인 인터페이스에서 입력 모드를 vi 모드를 사용하면, 이전 명령어를 검색하여 좀 더 효율적인 히스토리 기능을 사용할 수 있다.</p>
+
+<p>다음처럼 설정하여, 커맨드라인 에디트를 vi로 사용한다. 기본적으로 emacs로 설정되어 있다. ($HOME/.bash_profile 에 설정하면, 다음 로그인시에 기본으로 설정이 된다.)<br>
+$ set -o vi</p>
+
+<p>$set -o 를 입력하면 전체 커맨드 라인 옵션이 나오는데 vi 모드가 on 되어 있는지 확인하자.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_33.png" alt="nextree"></p>
+
+<p><strong>다음은 vi 모드에서 커맨드 라인 사용 방법이다. (vi에 익숙한 사용자는 바로 알겠지만, vi 에디터를 모르더라도 다음 부분만 익히면 된다.)</strong></p>
+
+<p><strong>ESC 키를 쳐서 명령어 모드(ex mode)로 진입한다.</strong> (vi 에디터와 동일)<br><br>
+<strong>$ /uname &lt;엔터&gt;</strong></p>
+
+<p>이후부터, <strong>n</strong> 키를 치면서 다음 명령어를 순차적으로 검색할 수 있다.</p>
+
+<p>원하는 명령어를 찾고 나서 수정을 원하는 단어까지 <strong>w</strong> 키를치고 커서를 빠르게 이동하자</p>
+
+<p>단어까지 이동하였으면 <strong>cw</strong> 입력하여 단어 편집 상태로 진입하여 타이핑하면 빠르게 커맨드 라인 입력을 할 수 있다.</p>
+
+<p>(사실 저는 거의 vi모드로 대부분 커맨드 명령어를 처리합니다. )</p>
+
+<h3>Control-R</h3>
+
+<p>컨트롤키와 r 키를 동시에 입력하면, 검색어 문자 입력 대기 상태로 진입한다.</p>
+
+<p>(reverse-i-search)”:</p>
+
+<p>키워드를 입력할때마다 점진적으로 히스토리에서 검색한다. 다시 한번더 컨트롤 + r 키를 입력하면 순차적으로 그 이전의 명령어를 검색하여 보여준다. 원하는 명령어를 찾으면 바로 엔터를 입력 또는 명령어를 수정할때는 왼쪽 또는 오른쪽 방향기로 이동 후 수정한다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_34.png" alt="nextree"></p>
+
+<p><br><br>
+이상 히스토리 기능에 대해서 살펴 보았습니다. 이것 외에도 이전명령어 치환하는 기능 등이 있으나 개인적으로도 이정도 기능외는 잘 사용하지 않을뿐더러 사용하지 않으면 잊어버리기 때문에 무용지물이 되버리곤 합니다.  이상의 기능만 잘 활용하면 커맨드 라인에서 키보드 타이핑을 하는 고통을 일부나마 줄일수 있을것이라 생각합니다.</p>
+
+<h2>3. 특수문자 { }</h2>
+
+<p>커맨드 라인 인터페이스에서 콤마는 파일명을 나열하고 명령에게 인수로 전달한다.</p>
+
+<p>touch 유틸리티는 파일의 접근, 수정 시간을 현재 시간이나 사용자가 명시한 시간으로 바꾼다. 파일이 존재하지 않을 경우에는 빈 파일을 생성한다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/04/Linux1_12.png" alt="nextree"></p>
+
+<p>mkdir  유틸리티는 디렉토리 생성한다.<br></p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_13.png" alt="nextree"></p>
+
+<p><br></p>
+
+<p>다음과 같이 파일명 인수가 콤마 갯수 만큼 확장하고 명령어에게 전달하고 있음을 확인 할 수 있다.</p>
+
+<p>echo 유틸리티는 셸이 전달하는 인수를 출력한다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_14.png" alt="nextree"></p>
+
+<h2>4. 특수문자 ?</h2>
+
+<p>물음표 기호(?)는 셸에게 파일명을 생성케 하는 특수 문자다. 이 문자는 기존의 파일명에 있는 문자를 하나에 해당된다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_15.png" alt="nextree"></p>
+
+<h2>5. 특수문자 *</h2>
+
+<p>별표(*)는 물음표와 비슷한 기능을 수행하지만, 어떤 개수의 문자열에라도 대응될 수 있다는 점이 다르다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_16.png" alt="nextree"></p>
+
+<h2>6. 특수문자 [ ]</h2>
+
+<p>문자 주위를 둘러싼 괄호 기호 [ ]는 셸이 각각의 문자를 포함하는 파일명을 검색하게한다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_17.png" alt="nextree"></p>
+
+<h2>7. 백그라운드에서의 프로그램 실행</h2>
+
+<p>지금까지의 예제에서 명령은 모두 포그라운드에서 실행됐다. <strong>포그라운드</strong>에서 명령을 실행하면 셸은 명령의 실행이 끝날 때까지 기다렸다가 사용자에게 프롬프트를 내보낸다. 반면 <strong>백그라운드</strong>에서 명령을 실행하면 사용자는 이명령의 실행이 끝날 때까지 기다릴 필요 없이 바로 다른 명령을 실행할 수 있다.</p>
+
+<p><strong>작업(job)</strong>은 파이프로 연결 가능한 여러 개의 명령을 가리킨다. 포그라운드 작업의 경우에는 한 윈도우나 한 화면에서 하나의 작업만 실행할 수 있다. 그러나 백그라운드 작업의 경우에는 여러 개를 실행하는 것이 가능하다. 사용자는 한번에 하나 이상의 작업을 실행함으로써 리눅스의 중요한 기능 중 하나인 멀티태스킹(multitasking) 기능을 사용할 수 있다. 실행 시간이 길면서 작업 진행에 대한 별도의 감시가 필요치 않은 명령을 실행할 때는 백그라운드 실행 기능이 매우 유용하다.</p>
+
+<p>백그라운드에서 명령을 실행하려면 커맨드 라인의 마지막에서 <strong>RETURN</strong> 키를 입력하기 전에 <strong>&amp;</strong> 기호를 입력한다. 그러면 셸은 작업에 번호를 매기고 이 작업 번호를 괄호로 둘러싸서 출력한다. 작업번호 뒤에는 <strong>PID(Process Identification)</strong> 번호가 나온다. 명령  뒤에 나오는 <strong>[1]</strong>이라는 숫자는 셸이 이 작업에 대한 작업 번호를 <strong>1</strong>을 할당했다는 것을 의미한다.</p>
+
+<p>백그라운드 작업의 실행이 끝나면 다음과 같은 메시지를 볼 수 있다.</p>
+
+<p>[1]+ Done    program</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_19.png" alt="nextree"></p>
+
+<h3>포그라운드에서 백그라운드로의 작업 이동</h3>
+
+<p>포그라운드 작업의 실행은 작업 보류 키, 일반적으로  <strong>CONTROL-Z</strong> 키를 입력함으로써 일시 중지할 수 있다. 셸은 프로세스를 멈추고 키보드로부터의 표준 입력을 중지시킨다. 이때 사용자가 <strong>bg</strong> 명령과 작업 번호를 입력하면 중지된 작업은 백그라운드로 옮겨서 다시 시작된다. 중지된 작업이 하나밖에 없다면 작업 번호를 입력할 필요가 없이 <strong>fg</strong>만 입력한다. 만약 백그라운드 작업이 하나 이상이라면 fg 인수로써 %번호를 입력해야한다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_18.png" alt="nextree"></p>
+
+<h3>kill : 백그라운드 작업의 중단</h3>
+
+<p>인터럽트 키(보통은  CONTROL-C)로는 백그라운드에서 실행되는 프로세스를 중단할 수 없다. 이러한 경우에는 kill 명령어를 사용해야 한다. 커맨드 라인에 kill과 중단하려는 프로세스의 PID를 입력하거나 퍼센트 기호(%)와 작업 번호를 입력한다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_20.png" alt="nextree"><br>
+<br></p>
+
+<p><strong>여기서 잠깐!</strong></p>
+
+<p>kill 명령어 대해서 시그널에 대해서만 잠깐 언급을 하자면, 가끔 습관적으로 무조건 강제 종료 시그널(-9)를 날리는 분을 계신데.. Java 데몬이나 기타 서버를 종료 시킬때 무조건 강제 종료시키기 보다 서버에게 종료시 자원 정리 시간을 주어 안전하게 종료하게 하자.</p>
+
+<p>1.SIGTERM(15) 시그널</p>
+
+<p>: 프로세스에게 보내어 DB 접속 및 각종 아직 커밋이 되지 않은 정보를 안전하게 저장할 수 있도록 기회를 준다.  프로세스가 이 시그널에도 무 반응시에만 강제 시그널를 보낸다.</p>
+
+<p>kill 13377  ( kill -15 13377  또는  kill -TERM 13377)</p>
+
+<p>2.SIGHUP(1) 시그널</p>
+
+<p>: 재 시작 시그널이다. ( kill -1 13377 또는 kill  -HUP  13377 )</p>
+
+<p>3.SIGKILL (9)</p>
+
+<p>: 묻지도 따지지도 않고(?) 무조건 강제 종료한다. (kill -9 13377)</p>
+
+<h2>8. 검색 명령</h2>
+
+<p>리눅스에서 명령을 입력하면 셸은 프로그램에서 사용하는 디렉토리를 검색해 처음 이름이 일치하는 프로그램을 실행한다. 이때 검색하는 디렉토리 목록을 <strong>검색 경로(search path)</strong>라고 한다. 검색 경로를 변경하는 방법은 <strong>PATH 환경변수</strong>를 변경하는 것이다. 사용자가 검색 경로를 변경하지 않으면 셸은 표준 디렉토리만 검색해 보고 검색 작업을 멈추게 된다. 물론 표준 디렉토리 외의 다른 디렉토리에도 유용한 유틸리티가 존재할 수 있다.</p>
+
+<p><br></p>
+
+<h3>which /  whereis: 유틸리티의 위치 검색</h3>
+
+<p>which 유틸리티는 유틸리티 파일의 전체 경로를 보여줌으로써 유틸리티(명령어)의 위치를 알려준다. 셸은 검색 경로를 탐색해서 처음 나오는 명령을 실행한다. which 는 이런 경우 셸이 어떤 프로그램을 실행할지를 알려준다.</p>
+
+<p>which유틸리티는 명령어가 예상 외의 동작을 수행할 경우 유용하다. which를 실행 해 보면 표준이 아닌 버전의 툴을 실행하고 있는지, 혹은 자신이 원하는 툴과는 전혀 다른 툴을 실행하고 있는지를 알 수 있게 될 것이다.</p>
+
+<p>다음과 같이 <strong>which ls</strong> 명령어로 확인 해 보면 alias가 먼저 실행한다는것을 알 수 있다.</p>
+
+<p>참고) 역슬래쉬()를 명령어 앞에 사용하면  alias 가 아닌 실제 명령어를 실행한다. ex)  \ls</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_28.png" alt="nextree"></p>
+
+<p><br></p>
+
+<p>프로그램의 이름이 주어지면 which는 검색 경로에 있는 디렉토리를 차례대로 검색, 프로그램의 위치를 찾는다. 검색 경로에 해당 프로그램이 하나 이상 존재하는 경우에 which는 처음 나오는 명령에 대한 정보만 보여준다.</p>
+
+<p><strong>whereis</strong> 유틸리티는 표준 디렉토리(standard directory) 목록을 통해 파일을 검색하며, 검색 경로와는 독립적으로 작동한다. whereis는 사용자가 지정한 바이너리(실행)파일, 매뉴얼 페이지 및 프로그램 소스 코드의 위치 검색에 사용할 수 있는 데, 이 유틸리티는 which와 달리 모든 해당 파일에 대한 정보를 보여준다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_29.png" alt="nextree"></p>
+
+<p><br></p>
+
+<h3>apropos: 키워드 검색</h3>
+
+<p>특정 작업을 수행하는 데 필요한 명령을 알지 못한다면 apropos 유틸리티로 키워드를 검색하면 된다. (apropos를 제대로 실행하려면 <strong>makewhatis</strong>로 whatis 데이터베이스를 설정하고 주기적으로 관리해야 한다. 이 작업은 보통 cron으로 처리한다.) 이 유틸리티는 man 페이지의 맨 위에 나오는 짧은 설명줄(description line)에서 키워드를 검색해 일치하는 항목이 있는 명령만 보여준다. man 유틸리티를 -<strong>k</strong>(keyword) 옵션과 함께 사용하면 apropos를 실행한 것과 동일한 결과를 볼 수 있다.</p>
+
+<p>다음 예제는 apropos를 who 키워드와 함계 호출한 결과를 보여준다. 이 키워드와 관련된 다른 유용한 유틸리도 찾아서 보여준다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_30.png" alt="nextree"></p>
+
+<p><br></p>
+
+<h3>locate: 파일 검색</h3>
+
+<p>locate유틸리티는 로컬 시스템에서 파일을 검색하는 작업을 수행한다. locate는 updatedb 유틸리티로 생성/업데이트한 locate 데이터베이스가 있어야만 정확하게 검색할 수 있따. 일반적으로 이 데이터베이스는 cron 스크립트로 하루에 한 번씩 업데이트된다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_31.png" alt="nextree"></p>
+
+<p><br></p>
+
+<h3>grep: 파일명 검색 또는 파일내 문자열 검색</h3>
+
+<p>which / whereis / apropos / locate 등은 유틸리티 검색 하는데 사용되지만, grep 유틸리티는 하나 이상의 파일에서 행 단위로 간단한 문자열이나 정규 표현식으로 표현된 <strong>pattern</strong>을 찾는다.</p>
+
+<p>-r 옵션은 하위디렉토까지 모두 검색한다.</p>
+
+<p>-l 옵션은 파일내의 텍스트와 패턴이 매치되는 텍스트를 출력하지 말고 매칭된 파일 목록만 출력한다.</p>
+
+<p>-L 옵션은 -l 옵션과 반대로 비 매칭된 파일 목록을 출력한다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_32.png" alt="nextree"></p>
+
+<h2>9. 접근 권한</h2>
+
+<h3>접근 권한</h3>
+
+<p>파일에 접근할 수 있는 사용자 유형은 다음 3가지로 구분할 수 있다.</p>
+
+<ul>
+<li><p>파일의 <strong>소유자(owner)</strong></p></li>
+<li><p>파일 소유자가 속해 있는 <strong>그룹 멤버(group)</strong></p></li>
+<li><p>그 밖의 <strong>모든 사람(other)</strong></p></li>
+</ul>
+
+<p>각 사용자별 <strong>읽기, 쓰기, 실행</strong> 의 파일 접근 권한을 설정 할 수 있으므로 모두 9가지 방법이 있다는 것을 의미한다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_21.png" alt="nextree"></p>
+
+<p><br></p>
+
+<h3>ls -l 권한 보기</h3>
+
+<p>첫 번째 문자 하이픈(-)으로 표기되어 있다. 이 파일은 일반 파일이기 때문이다. (디렉토리는 d가 표시된다.)</p>
+
+<p>그 다음에 오는 문자 9개는 각 사용자별 owner, group, other 에 읽기(r), 쓰기(w), 실행(x) 권한이 부여된다. (- 문자는 권한이 없음을 나타낸다.)</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_23.png" alt="nextree"></p>
+
+<p><br></p>
+
+<p>접근 권한 변경은 두가지 심볼릭과 절대값으로 변경이 가능하다.</p>
+
+<p><br></p>
+
+<h3>접근권한 변경: 심볼릭</h3>
+
+<p>심볼릭 모드: 사용자 종류</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_24.png" alt="nextree"></p>
+
+<p><br></p>
+
+<p>심볼릭 모드: 연산자</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_25.png" alt="nextree"></p>
+
+<p><br></p>
+
+<p>심볼릭 모드: 퍼미션</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_26.png" alt="nextree"></p>
+
+<p><br></p>
+
+<p>파일 소유자는 어떤 사용자에게 파일 접근 권한을 줄지, 그리고 어떤 접근 권한을 줄지를 결정해서 설정할 수 있다. 파일 소유자는 chmod(change mode) 유틸리티를 사용해서 파일의 접근 권한을 변경할 수 있다.</p>
+
+<p><strong>심볼릭 접근 권한 변경 예)  chmod a+rw letter</strong></p>
+
+<p>의미:  모든(<strong>a</strong>) 사용자에게 읽고 쓰는 권한(<strong>rw</strong>)을 부여(<strong>+</strong>)하라.</p>
+
+<p>다음은 접근 권한의 변경 유틸리티 chmod 로 심볼릭 모드 사용 예이다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_22.png" alt="nextree"></p>
+
+<p><br></p>
+
+<h3>접근권한 변경: 절대값</h3>
+
+<p>8진수를 사용하여 접근 모드를 설정할 수 있다.</p>
+
+<p><strong>절대값 접근 권한 변경 예) chmod 755 letter</strong></p>
+
+<p>의미: 소유자는 모든 권한을 그외 그룹과 다른 사용자는 읽기와 실행 권한을 부여하라</p>
+
+<p>다음은 접근 권한의 변경 유틸리티 chmod 로 절대값 모드 사용 예이다.</p>
+
+<p>참고1) 셸 스크립트의 경우, 읽기와 실행 퍼미션이 있어야 실행할 수 있지만 바이너리 파일은 실행 퍼미션만 있어도 실행할 수 있다.</p>
+
+<p>참고2) 디렉토리 경우 실행 퍼미션이란?  디렉토리 안으로 진입 가능 여부를 뜻한다.</p>
+
+<p><img src="http://www.nextree.co.kr/wp-content/uploads/2014/05/Linux1_27.png" alt="nextree"></p>
+
+<p><br></p>
+
+<h2>10. yum : 시스템을 최신 버전으로 유지하기</h2>
+
+<h3>패키지 갱신과 설치</h3>
+
+<p>리눅스 초기 릴리즈에는 갱신을 관리하는 툴이 없었다. RPM  툴로 개별 소프트웨어 패키지를 설치하거나 갱신할 수 있었지만, 패키지와 그 패키지와 종속 관계를 갖는 패키지를 찾는 일은 전적으로 사용자의 몫이었다.</p>
+
+<p>Terra Soft, 이 회사는 자동으로 패키지를 찾고 종속 관계를 검사하는 Yellow Dog Updater를 만들었다. 이 후 다른 배포판에 포팅되었다. Yellow dog Updater, Modified ( <strong>Yum</strong> ) 는 RedHat 또는 CentOS 리눅스의 기본 패키지 관리자 이다.</p>
+
+<h3>패키지 저장소 환경파일</h3>
+
+<p>환경파일 : /etc/yum.conf</p>
+
+<h3>업데이트</h3>
+
+<p>시스템 유틸리티이므로 루트 사용자에서 실행을 해야한다. update 옵션은 설치된 모든 패키지를 갱신한다. 설치된 패키지의 패키지 헤더를 내려받은 후 계속 진행할 것인지 묻고, 갱신된 패키지를 내려받아 설치한다.</p>
+
+<p>$ yum update</p>
+
+<h3>패키지 설치</h3>
+
+<p>새로운 패키지와 그것과 종속 관계를 가지는 패키지를 설치하려면, yum install 명령어 다음에 패키지 이름을 붙인다.</p>
+
+<p>$ yum  install  telnet</p>
+
+<h3>패키지 삭제</h3>
+
+<p>비숫한 구문을 사용하여 yum으로 패키지를 삭제 할 수 있다.</p>
+
+<p>$ yum  remove  telnet</p>
+
+<h2>11. 설치하고 싶은 유틸리티 찾기</h2>
+
+<p>자신이 설치하고 싶은 어플리케이션에 대해서 패키지명을 모르면 설치를 할 수 없다. 또한 자신이 원하는 유틸리티가 어느 패키지에 속해 있는지 알 수 없을때, 다음과 같이 검색하여 찾아 볼 수 있다.</p>
+
+<p><strong>1. 먼저 패키지 목록 조회를 하라.</strong></p>
+
+<ul>
+<li>(#) yum  list  vimtutor<br></li>
+</ul>
+
+<p>-Error: No matching Packages to list</p>
+
+<p><br> </p>
+
+<p><strong>2. 유틸리티 이름으로 검색을 하라.</strong></p>
+
+<ul>
+<li>(#) yum  search  vimtutor<br></li>
+</ul>
+
+<p>-No Matches found</p>
+
+<p><br> </p>
+
+<p><strong>3. 패키지 내에 서 제공하는 파일명을 검색 하라.</strong></p>
+
+<ul>
+<li>(#) yum  provides  vimtutor
+-You can use “*/vimtutor” and/or “*bin/vimtutor” to get that behaviour</li>
+</ul>
+
+<p>-No Matches found</p>
+
+<p><br> </p>
+
+<p><strong>4. 위에서 제시한 방법대로, 패키지 서브 디렉토리 까지 검색하라</strong></p>
+
+<ul>
+<li>(#) yum  <strong>provide</strong>  */vimtutor<br></li>
+</ul>
+
+<p>-vim-enhanced-7.2.xxxxxxx</p>
+
+<p><br> </p>
+
+<p>위와같이, 출력이 되었다면 찾기에 성공한것이다. 그럼 이것을 설치해야 하는데, 다음처럼 패키지명(버전 문자 이전까지)만 입력하면 대부분 설치가 가능하다.</p>
+
+<p>$ yum  install  <strong>vim-enhanced</strong></p>
+
+<p>설치가 성공적으로 끝나면 vimtutor 를 실행하여 제대로 설치되었는지 확인 해보자.</p>
+
+<p><br> </p>
+
+<p><strong>5. 위 4가지 방법으로 못 찾으면,  인터넷 검색을 적극 활용하여 해결의 실마리를 찾도록 한다.</strong></p>
+
+<p>이상으로 간단하게 정리하고 마무리를 하고자 합니다. 실무에서 가장 빈번하게 쓰이는 커맨드 유틸리티를 중점적으로 알아보았고, 백그라운드 프로세스 관리와 파일 접근 권한 관리에 대해서 알아 보았습니다. 또한 명령어 검색 및 소스파일내 문자열 검색 까지 살펴 보았고요, 마지막으로 패키지 유지 관리까지 정리해 보았습니다.</p>
+
+<p>제가 프로젝트에서도 이 정도 사용있으며 그렇게 큰 불편없이 잘 사용하고 있습니다. 그외 간단한 셸 스크립트 정도만 익혀두시면, 정기적인 백업 스크립트를 만들어 스케줄에 등록하여 사용 할 수도 있어 활용범위가 넓어 질것입니다. 끝까지 읽어 주셔셔 감사합니다.</p>
+
+<h3>참조 도서 및 사이트</h3>
+
+<ul>
+<li>Practical Guide to Linux Commands, Editors, and Shell Programming by Mark G. Sobell, Published July 1st 2005 by Prentice Hall</li>
+<li><a href="http://mylinuxbook.com/20-interesting-and-extremely-helpful-linux-command-line-tricks/">20 interesting and extremely helpful Linux command line tricks</a></li>
+</ul>
+
+<hr>
+
+<p><em>Posted by 송 병주 in 배움터 - 열공, 일터 - 경험과 노하우 on Jul 12th, 2014</em></p>
+
+  </div>
+
+  <div class="date">
+    Written on July 12, 2014
+  </div>
+  
+  <br>
+
+  <div>
+    <ul class="tags post-tags cf">
+      <li>Tagged:</li>
+      
+      <li><a href="/theme18/search/?tags=Linux 명령어">linux 명령어</a></li>
+      
+    </ul>
+  </div>
+  <br>
+
+  
+</article>
+
+<!-- responsive video js -->
+<script src="/js/fluidvids.js"></script>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <p>Nextree Consulting CO., LTD</p>
+                    
+          
+          
+          
+          <a href="http://github.com/wooseok7/theme18"><svg width="40px" height="40px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <path d="M0.336871032,30 C0.336871032,13.4314567 13.5672313,0 29.8877097,0 C46.208188,0 59.4385483,13.4314567 59.4385483,30 C59.4385483,46.5685433 46.208188,60 29.8877097,60 C13.5672313,60 0.336871032,46.5685433 0.336871032,30 Z M0.336871032,30" id="Github" fill="#333333" sketch:type="MSShapeGroup"></path>
+    <path d="M18.2184245,31.9355566 C19.6068506,34.4507902 22.2845295,36.0156764 26.8007287,36.4485173 C26.1561023,36.9365335 25.3817877,37.8630984 25.2749857,38.9342607 C24.4644348,39.4574749 22.8347506,39.62966 21.5674303,39.2310659 C19.7918469,38.6717023 19.1119377,35.1642642 16.4533306,35.6636959 C15.8773626,35.772144 15.9917933,36.1507609 16.489567,36.4722998 C17.3001179,36.9955141 18.0629894,37.6500075 18.6513541,39.04366 C19.1033554,40.113871 20.0531304,42.0259813 23.0569369,42.0259813 C24.2489236,42.0259813 25.0842679,41.8832865 25.0842679,41.8832865 C25.0842679,41.8832865 25.107154,44.6144649 25.107154,45.6761142 C25.107154,46.9004355 23.4507693,47.2457569 23.4507693,47.8346108 C23.4507693,48.067679 23.9990832,48.0895588 24.4396415,48.0895588 C25.3102685,48.0895588 27.1220883,47.3646693 27.1220883,46.0918317 C27.1220883,45.0806012 27.1382993,41.6806599 27.1382993,41.0860982 C27.1382993,39.785673 27.8372803,39.3737607 27.8372803,39.3737607 C27.8372803,39.3737607 27.924057,46.3153869 27.6704022,47.2457569 C27.3728823,48.3397504 26.8360115,48.1846887 26.8360115,48.6727049 C26.8360115,49.3985458 29.0168704,48.8505978 29.7396911,47.2571725 C30.2984945,46.0166791 30.0543756,39.2072834 30.0543756,39.2072834 L30.650369,39.1949165 C30.650369,39.1949165 30.6837446,42.3123222 30.6637192,43.7373675 C30.6427402,45.2128317 30.5426134,47.0792797 31.4208692,47.9592309 C31.9977907,48.5376205 33.868733,49.5526562 33.868733,48.62514 C33.868733,48.0857536 32.8436245,47.6424485 32.8436245,46.1831564 L32.8436245,39.4688905 C33.6618042,39.4688905 33.5387911,41.6768547 33.5387911,41.6768547 L33.5988673,45.7788544 C33.5988673,45.7788544 33.4186389,47.2733446 35.2190156,47.8992991 C35.8541061,48.1209517 37.2139245,48.1808835 37.277815,47.8089257 C37.3417055,47.4360167 35.6405021,46.8814096 35.6252446,45.7236791 C35.6157088,45.0178155 35.6567131,44.6059032 35.6567131,41.5379651 C35.6567131,38.470027 35.2438089,37.336079 33.8048426,36.4323453 C38.2457082,35.9766732 40.9939527,34.880682 42.3337458,31.9450695 C42.4383619,31.9484966 42.8791491,30.5737742 42.8219835,30.5742482 C43.1223642,29.4659853 43.2844744,28.1550957 43.3168964,26.6025764 C43.3092677,22.3930799 41.2895654,20.9042975 40.9014546,20.205093 C41.4736082,17.0182425 40.8060956,15.5675121 40.4961791,15.0699829 C39.3518719,14.6637784 36.5149435,16.1145088 34.9653608,17.1371548 C32.438349,16.3998984 27.0982486,16.4712458 25.0957109,17.3274146 C21.4005522,14.6875608 19.445694,15.0918628 19.445694,15.0918628 C19.445694,15.0918628 18.1821881,17.351197 19.1119377,20.6569598 C17.8961113,22.2028201 16.9902014,23.2968136 16.9902014,26.1963718 C16.9902014,27.8297516 17.1828264,29.2918976 17.6176632,30.5685404 C17.5643577,30.5684093 18.2008493,31.9359777 18.2184245,31.9355566 Z M18.2184245,31.9355566" id="Path" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+    <path d="M59.4385483,30 C59.4385483,46.5685433 46.208188,60 29.8877097,60 C23.8348308,60 18.2069954,58.1525134 13.5216148,54.9827754 L47.3818361,5.81941103 C54.6937341,11.2806503 59.4385483,20.0777973 59.4385483,30 Z M59.4385483,30" id="reflec" fill-opacity="0.08" fill="#000000" sketch:type="MSShapeGroup"></path>
+</svg></a>
+          
+          
+          
+          
+          
+          
+
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>

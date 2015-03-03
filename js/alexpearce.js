@@ -87,16 +87,16 @@ var layoutResultsPage = function(property, value, posts) {
     var tagsList = '<ul class="tags cf">',
         post     = posts[i],
         tags     = post.tags;
-        
+  // tag리스트 올릴 때 해당 경로 유의해서 업로드 실시 : /theme18
     for (var j in tags) {
-      tagsList += '<li><a href="/search/?tags=' + tags[j] + '">' + tags[j].toLowerCase() + '</a></li>';
+      tagsList += '<li><a href="/theme18/search/?tags=' + tags[j] + '">' + tags[j].toLowerCase() + '</a></li>';
     }
     tagsList += '</ul>';
     
     $container.find('ul.results').append(
       '<li>'
         // Page anchor
-        + '<a href="' + post.href + '">'
+        + '<a href="/theme18' + post.href + '">'
         + posts[i].title
         + '</a>'
         // Post date

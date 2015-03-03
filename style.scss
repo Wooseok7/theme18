@@ -21,6 +21,7 @@ body {
 	background: $white;
   font: 18px/1.4 $helvetica;
   color: $darkGray;
+
 }
 
 .container {
@@ -28,8 +29,9 @@ body {
   max-width: 800px;
   padding: 0 10px;
   width: 100%;
-}
 
+}
+  
 h1, h2, h3, h4, h5, h6 {
   font-family: $helveticaNeue;
   color: $darkerGray;
@@ -41,6 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 
   @include mobile {
     line-height: 1.4;
+ 
   }
 }
   
@@ -108,7 +111,11 @@ strong, b {
 
 img {
   max-width: 100%;
-}
+    }
+.aligncenter{
+  display:block;
+  margin:0 auto
+  }
 
 .date {
   font-style: italic;
@@ -244,7 +251,7 @@ nav {
 }
 
 .posts > .post:last-child {
-  padding-bottom: 5em;
+  padding-bottom: .2em;
   border-bottom: none;
 }
 
@@ -397,6 +404,7 @@ padding-left:20px;
   font-size: 10px;
   font-size: 0.625rem;
 }
+
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start

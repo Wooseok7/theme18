@@ -48,47 +48,72 @@
     </div>
 
     <div id="main" role="main" class="container">
-      <article class="post">
-  <h1>You're up and running!</h1>
-
-  <div class="entry">
-    <p>Next you can update your site name, avatar and other options using the _config.yml file in the root of your repository (shown below <img class='emoji' title=':point_down:' alt=':point_down:' src='https://assets.github.com/images/icons/emoji/unicode/1f447.png' height='20' width='20' align='absmiddle' />).</p>
-
-<p><img src="/theme18/images/config.png" alt="_config.yml"></p>
-
-<p>The easiest way to make your first post is to edit this one. Go into /_posts/ and update the Hello World markdown file. For more instructions head over to the <a href="https://github.com/barryclark/jekyll-now">Jekyll Now repository</a> on GitHub.</p>
-
-  </div>
-
-  <div class="date">
-    Written on March  3, 2014
-  </div>
+      <!-- This loops through the paginated posts -->
+<div class="posts">
   
-  <br>
+    <article class="post">    
+      
+      <h1><a href="/theme18/JUnit/">새내기 개발자의 JUnit 여행기</a></h1>
 
-  <div>
-    <ul class="tags post-tags cf">
-      <li>Tagged:</li>
+      <div class="entry">
+        이번 글에서는 JUnit 단위 테스트 Framework에 대해 알아봅니다. JUnit은 Java의 단위 테스트에서 빼놓고 이야기하기 어려울 정도로 절대적인 위치를 차지하고 있습니다. 그래서 높은 수준은 아니어도 기본적인 내용은 누구나 알고 있어야 합니다. 이번 글에서는 Eclipse에서 JUnit을 설치하는 방법과 간단한 예제를 통해 JUnit 사용법을 알아봅니다. 1. JUnit이란? JUnit은 단위 테스트 도구입니다. 외부 테스트 프로그램(케이스)을 작성하여 System.out으로 번거롭게 디버깅하지 않아도 됩니다. 프로그램 테스트 시 걸릴 시간도 관리할 수 있게 해주며 오픈 소스이며, 플러그인 형태로 Eclipse에 포함되어 있습니다. 하나의 jar 파일이 전부이며 사용법도 간단합니다. 어느 정도 개발이 진행되면 프로그램에 대한 단위 테스트는 반드시 수행해야 합니다. JUnit은 보이지 않고 숨겨진 단위 테스트를 끌어내어 정형화시켜 단위 테스트를...
+      </div>
       
-      <li><a href="/theme18/search/?tags=first">first</a></li>
+      <p style="text-align:right">
+      <a href="/theme18/JUnit/" class="read-more">Continue treeing</a>
+    
+    </article>
+  
+    <article class="post">    
       
-      <li><a href="/theme18/search/?tags=blog">blog</a></li>
+      <h1><a href="/theme18/jQuery%20selector/">Jquery selector</a></h1>
+
+      <div class="entry">
+        표(table)는 데이터를 좀 더 이해하기 쉽고, 보기 좋게 해 주는 역할을 합니다. 하지만, 수십개의 데이터를 보게 된다면, 눈도 아프고, 복잡해 보이게 될 수도 있습니다. 그래서 ‘동적으로 데이터를 조건에 맞게 (날짜, 시간 등) 그룹을 지어 표현 해 줄 수 있다면 얼마나 좋을까? ‘라는 질문으로 시작하여 쉽게 접할 수 있는 jQuery, 그 중에서도 선택자(selecotr)를 활용해 구현을 해 보았습니다. 1. 왜 그룹이 필요한가? 우리게 표를 그리는 이유는, 수 없이 많은 데이터를 한눈에 쉽고 빠르게, 보고 분석하기 위해서 입니다. 아래 표에서 이상한 점을 발견 하셨습니까? 아래 표 처럼 모든 데이터를 아무런 정렬, 그룹 없이 있다면, 이 데이터를 이해하는데 시간이 필요하며, 오히려 있으나 마나한 쓸데...
+      </div>
       
-      <li><a href="/theme18/search/?tags=post">post</a></li>
+      <p style="text-align:right">
+      <a href="/theme18/jQuery%20selector/" class="read-more">Continue treeing</a>
+    
+    </article>
+  
+    <article class="post">    
       
-      <li><a href="/theme18/search/?tags=jekyll">jekyll</a></li>
+      <h1><a href="/theme18/Linux/">꼭 필요한 리눅스 명령어</a></h1>
+
+      <div class="entry">
+        여러 프로젝트를 진행하다보면, 리눅스 또는 유닉스를 다룰수 밖에 없는 상황이 오게 마련입니다. 그러한 상황에 직면했을때 매번 웹 검색을 하거나 그나마 몇가지 알고 있는 명령어만 가지고 반복작업을 통해 해결하곤 합니다. 그 간의 경험을 바탕으로 알고나면 단순한 반복 작업을 간단하게 해결 할 수 있는 몇가지 팁을 소개합니다. 이 글은 현재 프로젝트에서 사용중인 CentOS Linux 기준으로 작성이 되었지만, 대부분의 리눅스에서 사용되어지는 bash셸(Bourne Again Shell) 및 공통 유틸리티에 대해서 다루므로 특정 리눅스 배포판에 관계없이 대부분 사용할 수 있습니다. 대부분의 리눅스관련 서적과 같이 명령어를 정리하자면, 글이 장황해지고 포스팅으로써 분량이 맞지 않기 때문에 커맨드라인을 효과적으로 사용 할 수 있는 유틸리티를 중심으로 소개합니다. 1. 명령어: cd cd...
+      </div>
       
-      <li><a href="/theme18/search/?tags=test">test</a></li>
-      
-    </ul>
-  </div>
-  <br>
+      <p style="text-align:right">
+      <a href="/theme18/Linux/" class="read-more">Continue treeing</a>
+    
+    </article>
+  
+</div>
+
+<!-- Pagination links -->
+
+<div class="pagination">
+  
+    <a href="/theme18/index.html">&laquo; PREV</a>
+  
 
   
-</article>
+    
+      <a href="/theme18/index.html">1</a>
+    
+  
+    
+      <em>2</em>
+    
+  
 
-<!-- responsive video js -->
-<script src="/js/fluidvids.js"></script>
+  
+    <span>NEXT &raquo;</span>
+  
+</div>
+
 
     </div>
 

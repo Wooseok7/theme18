@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    <title>NamooSori</title>
+    <link rel="icon"  href="https://raw.githubusercontent.com/Wooseok7/theme20/gh-pages/Nextree%20CI_ico.ico">
+
+    <meta name="author" content="" />
+    <meta name="description" content="">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/theme18/style.css" />
+    <link rel="alternate" type="application/rss+xml" title=" - " href="/theme18/feed.xml" />
+
+
+    
+    <script type="text/javascript" src="/theme18/js/jquery-1.11.1.min.js"></script>
+    <!-- tag, category search -->
+    <script defer src="/theme18/js/alexpearce.js"></script>
+
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/theme18/" class="site-avatar"><img src="" /></a>
+          
+          <div class="site-info">
+            <h1 class="site-name"><a href="/theme18/"></a></h1>
+            <p class="site-description"></p>
+          </div>
+          
+          <nav>
+            <a href="/theme18/about/">About</a>
+            <a href="/theme18/categories">Categories</a>     
+            <a href="/theme18/archive/">Archive</a>
+            <a href="/theme18/tags/">Tags</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>세 가지 DI 컨테이너로 향하는 저녁 산책</h1>
+
+  <div class="entry">
+    <p><em>애플리케이션 코드를 작성할 때, 특정기능이 필요하면 라이브러리를 호출하여 사용하곤 합니다. 프로그램의 흐름을 제어하는 주체가 애플리케이션 코드인 셈이지요. 하지만 프레임워크(Framework) 기반의 개발에서는 프레임워크 자신이 흐름을 제어하는 주체가 되어, 필요할 때마다 애플리케이션 코드를 호출하여 사용합니다.</em></p>
+
+<p>프레임워크에서 이 제어권을 가지는 것이 바로 컨테이너(Container)입니다. 객체에 대한 제어권이 개발자로부터 컨테이너에게 넘어가면서 객체의 생성부터 생명주기 관리까지의 모든 것을 컨테이너가 도맡아서 하게됩니다. 이를 일반적인 제어권의 흐름이 바뀌었다고 하여 IoC(Inversion of Control : 제어의 역전)라고 부릅니다.</p>
+
+<h2>1. DI(Dependency Injection)이해하기</h2>
+
+<p>여기서 좀 더 자세히 들어가 DI라는 개념을 살펴봅니다. DI는 클래스 사이의 의존관계를 빈 설정 정보를 바탕으로 컨테이너가 자동적으로 연결해주는 것을 말합니다. 개발자들은 제어를 담당할 필요없이 빈 설정 파일에 의존관계가 필요하다는 정보만 추가해주면 됩니다. 그러면 오브젝트 레퍼런스를 외부(Container)로부터 주입 받아서, 실행 시에 동적으로 의존관계가 생성됩니다. 결국 컨테이너가 흐름의 주체가 되어서 애플리케이션 코드에 의존관계를 주입해주는 것입니다.</p>
+
+<p>이해를 돕기 위해 DI가 적용되지 않은 코드와 적용된 코드를 비교해 보겠습니다.</p>
+
+<h3>IoC/DI가 적용되지 않은 경우</h3>
+
+<p><br><br>
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/07/yrkim-140701-framework-02.png></img></p><br>
+<br></p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">package</span> <span class="n">kr</span><span class="o">.</span><span class="n">co</span><span class="o">.</span><span class="n">nextree</span><span class="p">;</span>
+
+    <span class="n">public</span> <span class="k">class</span> <span class="nc">Foo</span><span class="p">{</span>
+        <span class="n">private</span> <span class="n">Bar</span> <span class="n">bar</span><span class="p">;</span>
+
+        <span class="n">public</span> <span class="n">Foo</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">bar</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SubBar</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></div>
+
+<p align="center">[예제 1] IoC/DI가 적용되지 않은 경우</p>
+
+<p><br></p>
+
+<p>위의 코드를 보시면 IoC/DI가 적용되지 않을 경우, Bar 인터페이스를 구현하는 구체적인 클래스의 이름(SubBar)을 애플리케이션 코드에서 바로 등장시켜 초기화합니다. 이 경우, 동적으로 구현 클래스를 정해주기 어렵습니다.</p>
+
+<h3>IoC/DI가 적용된 경우</h3>
+
+<p><br></p>
+
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/07/yrkim-140701-framework-03.png></img></p>
+
+<p><br></p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">//</span> <span class="err">컨테이너</span>
+    <span class="o">&lt;</span><span class="n">beans</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">bean</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;bar&quot;</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;kr.co.nextree.SubBar&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">bean</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;foo&quot;</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;kr.co.nextree.Foo&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;bar&quot;</span> <span class="n">ref</span><span class="o">=</span><span class="s">&quot;bar&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;/</span><span class="n">bean</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">beans</span><span class="o">&gt;</span>
+
+
+    <span class="o">//</span> <span class="err">애플리케이션</span> <span class="err">코드</span>
+    <span class="n">package</span> <span class="n">kr</span><span class="o">.</span><span class="n">co</span><span class="o">.</span><span class="n">nextree</span><span class="p">;</span>
+
+    <span class="n">public</span> <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+        <span class="n">private</span> <span class="n">Bar</span> <span class="n">bar</span><span class="p">;</span>
+
+        <span class="n">public</span> <span class="n">void</span> <span class="n">setBar</span><span class="p">(</span><span class="n">Bar</span> <span class="n">bar</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">bar</span> <span class="o">=</span> <span class="n">bar</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></div>
+
+<p align="center">[예제 1] IoC/DI가 적용된 경우</p>
+
+<p><br></p>
+
+<p>IoC/DI가 적용될 경우, 우선 사용할 객체들을 컨테이너에 등록합니다. 그리고 애플리케이션 코드에서 해당 객체를 setter함수의 매개변수로 받아와서 실행 시에 동적으로 의존관계를 설정해줍니다. 이 경우엔 Bar 인터페이스를 구현하는 구체적인 클래스의 이름이 애플리케이션 코드에 등장하지 않아, 동적으로 구현클래스를 정해줄 수 있게 됩니다.</p>
+
+<p>따라서 IoC/DI를 사용하면 객체를 생성할 때에, 해당 객체가 참조하고 있는 다른 객체에 대한 종속성을 애플리케이션 코드 외부(Container)에 설정하게 함으로써 결합도(coupling)는 낮추면서 유연성과 확장성은 향상시킬 수 있습니다.<br></p>
+
+<p>참고) 결합도(coupling)<br><br>
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/08/yrkim-140803-dicontainer-02.png></img></p><br>
+<br></p>
+
+<p>소프트웨어 공학에서, 결합도(coupling) 또는 의존도는 어떤 모듈이 다른 모듈에 의존하는 정도를 나타내는 것이다.</p>
+
+<p>결합도는 보통 응집도(cohesion)과 대비된다. 낮은 결합도는 종종 높은 응집도와 관련이 있으며, 그 역도 마찬가지이다. (중략) 낮은 결합도는 종종 구조화가 잘 된 컴퓨터 시스템의 지표이며, 좋은 설계이며, 높은 응집도를 겸비하면, 높은 가독성과 유지보수성이라는 일반적인 목표를 이루게 된다.</p>
+
+<p>출처 : <a href="http://ko.wikipedia.org/wiki/%EA%B2%B0%ED%95%A9%EB%8F%84">http://ko.wikipedia.org/wiki/%EA%B2%B0%ED%95%A9%EB%8F%84</a></p>
+
+<h2>2. DI의 세가지 유형</h2>
+
+<p>마틴 파울러가 그의 저서인 Inversion of Control Containers and the Dependency Injection pattern에 제시한 세가지 DI패턴이 일반적인 DI의 적용 방법입니다. 각 예제는 마틴 파울러의 홈페이지(<a href="http://martinfowler.com/articles/injection.html">http://martinfowler.com/articles/injection.html</a>)에 제시된 것입니다.</p>
+
+<p>1) 생성자를 이용한 의존성 삽입 (Constructor Injection : type 1 IoC)</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">필요한 의존성을 모두 포함하는 클래스의 생성자를 만들고 그 생성자를 통해 의존성을 주입한다.
+</code></pre></div>
+<p>즉 생성자에 파라미터를 만들어두고 이를 통해 DI 컨테이너가 의존할 오브젝트 레퍼런스를 넘겨주는 방식입니다.<br></p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">//</span> <span class="n">PicoContainer</span>
+    <span class="k">class</span> <span class="nc">MovieLister</span><span class="o">...</span>
+        <span class="n">public</span> <span class="n">MovieLister</span><span class="p">(</span><span class="n">MovieFinder</span> <span class="n">finder</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">finder</span> <span class="o">=</span> <span class="n">finder</span><span class="p">;</span>       
+        <span class="p">}</span>
+
+    <span class="k">class</span> <span class="nc">ColonMovieFinder</span><span class="o">...</span>
+        <span class="n">public</span> <span class="n">ColonMovieFinder</span><span class="p">(</span><span class="n">String</span> <span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="p">;</span>
+        <span class="p">}</span></code></pre></div>
+
+<p align="center">[예제 3] 생성자를 이용한 의존성 삽입 </p>
+
+<p><br></p>
+
+<p>2) setter() 메소드를 이용한 의존성 삽입 (Setter Injection : type 2 IoC)</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">의존성을 입력받는 세터(setter) 메소드를 만들고 이를 통해 의존성을 주입한다.
+</code></pre></div>
+<p>setter()메소드는 외부에서 오브젝트 내부의 attribute값을 변경하려는 용도로 주로 사용됩니다. 핵심기능은 파라미터로 전달된 값을 내부의 인스턴스 변수에 저장하는 것입니다. 스프링에서 지지하는 DI방식으로, 외부에서 제공받은 오브젝트 레퍼런스를 저장해뒀다가 내부의 메소드에서 사용하게 하는 DI방식에서 활용하기에 적당합니다. 아래의 예제와 함께 위쪽에서 언급된 IoC/DI가 적용된 경우의 예제 또한 setter() 메소드를 통한 DI방식입니다.<br></p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">//</span> <span class="n">Spring</span> <span class="n">Container</span>
+    <span class="k">class</span> <span class="nc">MovieLister</span><span class="o">...</span>
+        <span class="n">private</span> <span class="n">MovieFinder</span> <span class="n">finder</span><span class="p">;</span>
+        <span class="n">public</span> <span class="n">void</span> <span class="n">setFinder</span><span class="p">(</span><span class="n">MovieFinder</span> <span class="n">finder</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">finder</span> <span class="o">=</span> <span class="n">finder</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="k">class</span> <span class="nc">ColonMovieFinder</span><span class="o">...</span>
+        <span class="n">public</span> <span class="n">void</span> <span class="n">setFilename</span><span class="p">(</span><span class="n">String</span> <span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="p">;</span>
+        <span class="p">}</span></code></pre></div>
+
+<p align="center">[예제 4]  setter()메소드를 이용한 의존성 삽입 </p>
+
+<p><br><br>
+3) 초기화 인터페이스를 이용한 의존성 삽입 (Interface Injection : type 3 IoC)<br>
+<br></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">의존성을 주입하는 함수를 포함한 인터페이스를 작성하고 이 인터페이스를 구현하도록 함으로써 실행시에 이를 통하여 의존성을 주입한다.
+</code></pre></div>
+<p><br><br>
+가장 먼저 Injection을 하기 위한 인터페이스를 정의한 후, 구현하면 DI가 이루어지도록 합니다. 이는, 스프링이 지원하지 않는 DI방식입니다.<br></p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">//</span> <span class="n">Avalon</span>
+    <span class="n">public</span> <span class="n">interface</span> <span class="n">InjectFinder</span> <span class="p">{</span>
+        <span class="n">void</span> <span class="n">injectFinder</span><span class="p">(</span><span class="n">MovieFinder</span> <span class="n">finder</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">class</span> <span class="nc">MovieLister</span> <span class="n">implements</span> <span class="n">InjectFinder</span><span class="o">...</span>
+        <span class="n">public</span> <span class="n">void</span> <span class="n">injectFinder</span><span class="p">(</span><span class="n">MovieFinder</span> <span class="n">finder</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">finder</span> <span class="o">=</span> <span class="n">finder</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="n">public</span> <span class="n">interface</span> <span class="n">InjectFinderFilename</span> <span class="p">{</span>
+        <span class="n">void</span> <span class="n">injectFilename</span> <span class="p">(</span><span class="n">String</span> <span class="n">filename</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">class</span> <span class="nc">ColonMovieFinder</span> <span class="n">implements</span> <span class="n">MovieFinder</span><span class="p">,</span> <span class="n">InjectFinderFilename</span><span class="o">......</span>
+        <span class="n">public</span> <span class="n">void</span> <span class="n">injectFilename</span><span class="p">(</span><span class="n">String</span> <span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="p">;</span>
+        <span class="p">}</span></code></pre></div>
+
+<p align="center">[예제 5]  초기화 인터페이스를 이용한 의존성 삽입 </p>
+
+<p><br></p>
+
+<h2>3. DI Container의 종류</h2>
+
+<p>1) Spring Container</p>
+
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/08/yrkim-140803-dicontainer-03.png ></img></p>
+
+<p align="center"> 이미지 출처:<http://www.javatpoint.com/spring-tutorial></p>
+
+<p><br><br>
+IoC/DI가 자바의 표준 프로그래밍 모델로 발전해오며 다양한 종류의 IoC/DI프레임워크가 등장했습니다. 하지만 그들중 단연 독보적인 프레임워크는 바로 Spring입니다. 유연하고 강력한 기능으로 다양하게 컨테이너를 사용할 수 있기 때문에 대부분 Spring을 선택하곤 합니다.</p>
+
+<p>스프링 IoC 컨테이너가 관리하는 객체를 빈(bean)이라고 부릅니다. 그래서 스프링에서는 이 빈(bean)들을 관리한다는 의미로 컨테이너를 빈 팩토리(Bean Factory)라고 부릅니다(팩토리 디자인 패턴 구현). 이렇게 오브젝트의 생성과 오브젝트 사이의 런타임(Run-time) 관계를 설정하는 DI관점으로 볼 때는 컨테이너를 빈 팩토리라고 합니다. 하지만 스프링의 DI container는 단순한 DI작업보다 더 많은 일을 합니다. 그래서 DI기능에 엔터프라이즈 애플리케이션을 개발하는 데 필요한 여러 가지 컨테이너 기능을 추가하여 애플리케이션 컨텍스트(Application Context)라고 부르기도 합니다. 스프링에서는 이러한 컨테이너를 일반적으로 구성(Configuration)정보를 담아 xml로 구성합니다.</p>
+
+<p>JDBCDataManager 컴포넌트를 통해 스프링의 DI를 살펴봅니다. [예제 6]의 JDBCDataManager 클래스에서는 스프링의 DI방식인 setter()메소드를 사용하고, [예제 7]과 같이 xml파일을 설정해줍니다. dataSource가 myDataSource빈을 참조하도록 설정해서 해당 빈들을 등록해주어, 런타임에 DI가 일어납니다.<br></p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">public</span> <span class="k">class</span> <span class="nc">JDBCDataManger</span> <span class="p">{</span>
+        <span class="n">private</span> <span class="n">DataSource</span> <span class="n">dataSource</span><span class="p">;</span>
+
+        <span class="n">public</span> <span class="n">void</span> <span class="n">setDataManager</span><span class="p">(</span><span class="n">DataSource</span> <span class="n">dataSource</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">dataSource</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">public</span> <span class="n">void</span> <span class="n">getData</span><span class="p">()</span> <span class="p">{</span>
+            <span class="o">//</span><span class="n">use</span> <span class="n">dataSource</span> <span class="k">for</span> <span class="n">something</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></div>
+
+<p align="center">[예제 6] JDBCDataManager  
+
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="n">bean</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;myDataSource&quot;</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;org.apache.commons.dbcp.BasicDataSource&quot;</span> <span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;driverClassName&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="n">com</span><span class="o">.</span><span class="n">mydb</span><span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">Driver</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;url&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="n">jdbc</span><span class="p">:</span><span class="n">mydb</span><span class="p">:</span><span class="o">//</span><span class="n">server</span><span class="p">:</span><span class="n">port</span><span class="o">/</span><span class="n">mydb</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;username&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="n">root</span><span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">bean</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">bean</span> <span class="nb">id</span><span class="o">=</span><span class="s">&quot;dataManager&quot;</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;example.JDBCDataManger&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;dataSource&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">ref</span> <span class="n">bean</span><span class="o">=</span><span class="s">&quot;myDataSource&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;/</span><span class="nb">property</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">bean</span><span class="o">&gt;</span></code></pre></div>
+
+<br>
+
+<p align="center">[예제 7] Spring xml 설정 정보  
+출처 : <https://today.java.net/pub/a/today/2004/02/10/ioc.html></p>
+
+<p><br><br>
+2) PicoContainer<br>
+<p align="center"><img src=http://www.nextree.co.kr/wp-content/uploads/2014/08/yrkim-140803-dicontainer-04.png ></img></p><br>
+<p align="center">이미지 출처 : <a href="http://www.picocontainer.com">http://www.picocontainer.com</a></p>
+
+<p>PicoContainer는 DI자체에 집중한 상당히 작은 컨테이너 프레임워크입니다. 외부구성파일(Configuration xml 파일)도 없고 애노테이션(annotation)도 필요없습니다. 단지 컴포넌트를 컨테이너와 함께 등록하기만하면 됩니다. 따라서 굉장히 단순한 구성으로 DI를 구현할 수 있습니다. 하지만 이 때문에 복잡한 대형 프로젝트에는 적합하지 않는 DI 컨테이너로 알려져 있기도 합니다.</p>
+
+<p>PicoContainer의 특성을 간단히  ‘임의의 객체의 인스턴스화’라고 할 수 있습니다. 이를 통해 많은 수의 클래스와 인터페이스간의 복잡한 의존관계들을 단순화시킬 수 있습니다.<br></p>
+
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/08/yrkim-140803-dicontainer-06.jpg ></img></p>
+
+<p><br><br>
+이번에도 JDBCDataManager 컴포넌트를 통해 PicoContainer의 DI를 살펴봅니다. [예제 8]의 JDBCDataManager 클래스에서는 PicoContainer의 DI방식인 constructor를 사용합니다. 그리고 PicoContainer는 configuration파일을 사용하는 대신, [예제 9]와 같은 자바파일을 통해 설정합니다.<br>
+<br></p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">public</span> <span class="k">class</span> <span class="nc">JDBCDataManger</span> <span class="p">{</span>
+        <span class="n">private</span> <span class="n">DataSource</span> <span class="n">dataSource</span><span class="p">;</span>
+
+        <span class="n">public</span> <span class="n">JDBCDataManger</span><span class="p">(</span><span class="n">DataSource</span> <span class="n">dataSource</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">dataSource</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">public</span> <span class="n">void</span> <span class="n">getData</span><span class="p">()</span> <span class="p">{</span>
+            <span class="o">//</span><span class="n">use</span> <span class="n">dataSource</span> <span class="k">for</span> <span class="n">something</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></div>
+
+<p align="center">[예제 8] JDBCDataManager
+<br>
+
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">//</span><span class="n">create</span> <span class="n">a</span> <span class="n">datasource</span> <span class="n">bean</span>
+    <span class="n">BasicDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BasicDataSource</span><span class="p">();</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="n">setDriverClassName</span><span class="p">(</span><span class="s">&quot;com.mydb.jdbc.Driver&quot;</span><span class="p">);</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="s">&quot;jdbc:mysql://localhost:3306/mydb&quot;</span><span class="p">);</span>
+    <span class="n">dataSource</span><span class="o">.</span><span class="n">setUsername</span><span class="p">(</span><span class="s">&quot;Bob&quot;</span><span class="p">);</span>
+
+    <span class="o">//</span><span class="n">create</span> <span class="n">the</span> <span class="n">container</span>
+    <span class="n">MutablePicoContainer</span> <span class="n">pico</span> <span class="o">=</span> <span class="n">new</span> <span class="n">DefaultPicoContainer</span><span class="p">();</span>
+
+    <span class="o">//</span><span class="n">register</span> <span class="n">components</span> <span class="k">with</span> <span class="n">container</span>
+    <span class="n">ConstantParameter</span> <span class="n">dataSourceParam</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ConstantParameter</span><span class="p">(</span><span class="n">dataSource</span><span class="p">);</span>
+    <span class="n">String</span> <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;DataManager&quot;</span><span class="p">;</span>
+    <span class="n">Parameter</span><span class="p">[]</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="n">dataSourceParam</span><span class="p">};</span>
+
+    <span class="o">/*</span>
+     <span class="o">*</span> <span class="n">Now</span> <span class="n">each</span> <span class="n">request</span> <span class="k">for</span> <span class="n">a</span> <span class="n">DataManager</span> <span class="n">will</span> <span class="n">instantiate</span>
+     <span class="o">*</span> <span class="n">a</span> <span class="n">JDBCDataManager</span> <span class="nb">object</span> <span class="k">with</span> <span class="n">our</span> <span class="n">defined</span>
+     <span class="o">*</span> <span class="n">dataSource</span> <span class="nb">object</span>
+     <span class="o">*/</span>
+    <span class="n">pico</span><span class="o">.</span><span class="n">registerComponentImplementation</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">JDBCDataManger</span><span class="o">.</span><span class="n">class</span><span class="p">,</span><span class="n">params</span><span class="p">);</span></code></pre></div>
+
+<p align="center">[예제 9] PicoContainer 설정  
+출처 : <https://today.java.net/pub/a/today/2004/02/10/ioc.html></p>
+
+<p><br></p>
+
+<p>3) Guice<br>
+<br><br>
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/08/yrkim-140803-dicontainer-05.jpg></img></p></p>
+
+<p align="center">이미지 출처 : <http://garbagecollected.org/2007/12/12/guice-book/>
+
+Guice는 구글이 발표한 DI 프레임워크 입니다. Guice는 Java5이상을 위한 가벼운 DI container이며, 애노테이션(Annotation)을 사용하여 자바 객체를 구성하도록 DI를 구현합니다. 구현클래스가 인터페이스와 묶이도록 한 후, @Inject 애노테이션을 사용하여 생성자나 메소드, 필드에 dependency를 주입합니다. 동일한 인터페이스에 하나 이상의 구현이 필요한 경우, 사용자는 구현을 식별하는 커스텀 애노테이션(Custom Annotation)을 만들 수 있습니다. 그리고 주입시 그 애노테이션을 사용합니다. Guice는 이처럼 자바 애노테이션을 사용한 최초의 일반적인 DI framework입니다. Guice의 장점으로는 사용편의성이나 에러메시지의 확실성과 더불어 빠른 속도를 꼽을 수 있습니다.
+
+Guice의 API중 Binder는 인터페이스와 구현클래스의 매핑을 담당하고, Module은 그런 Binding의 집합을 유지합니다. 다음의 예제는 이러한 API를 통해 Service인터페이스를 ServiceImpl이라는 구현클래스에 싱글톤으로 bind한 후, Client에서 @Inject 애노테이션을 사용해 DI하는 것을 보여줍니다.
+
+<br>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">public</span> <span class="k">class</span> <span class="nc">MyModule</span> <span class="n">implements</span> <span class="n">Module</span> <span class="p">{</span>
+        <span class="n">public</span> <span class="n">void</span> <span class="n">configure</span><span class="p">(</span><span class="n">Binder</span> <span class="n">binder</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">binder</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">Service</span><span class="o">.</span><span class="n">class</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">ServiceImpl</span><span class="o">.</span><span class="n">class</span><span class="p">)</span>
+            <span class="o">.</span><span class="ow">in</span><span class="p">(</span><span class="n">Scopes</span><span class="o">.</span><span class="n">SINGLETON</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></div>
+
+<p align="center">[예제 10] Module의 구현 클래스
+
+<br>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">public</span> <span class="k">class</span> <span class="nc">Client</span> <span class="p">{</span>
+        <span class="n">private</span> <span class="n">final</span> <span class="n">Service</span> <span class="n">service</span><span class="p">;</span>
+
+        <span class="o">//</span> <span class="n">constructor</span><span class="err">를</span> <span class="err">통한</span> <span class="n">injection</span>
+        <span class="nd">@Inject</span>
+        <span class="n">public</span> <span class="n">Client</span><span class="p">(</span><span class="n">Service</span> <span class="n">service</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">service</span> <span class="o">=</span> <span class="n">service</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">public</span> <span class="n">void</span> <span class="n">go</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">service</span><span class="o">.</span><span class="n">go</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></div>
+
+<p align="center">[예제 11] @Inject 애노테이션을 통한 DI</p>
+
+<p align="center">출처 : Guice 1.0 User’s Guide문서 </p>
+
+<p><br><br></p>
+
+<p>Guice에서는 위와 같이 Constructor를 통한 injection을 선호하지만 Method, Field를 통해서도 injection이 가능합니다.<br>
+<br></p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">//</span> <span class="n">Method</span><span class="err">를</span> <span class="err">통한</span> <span class="n">injection</span>
+    <span class="n">public</span> <span class="k">class</span> <span class="nc">FrogMan</span><span class="p">{</span>
+        <span class="n">private</span> <span class="n">Vehicle</span> <span class="n">vehicle</span><span class="p">;</span>
+
+        <span class="nd">@Inject</span>
+        <span class="n">public</span> <span class="n">void</span> <span class="n">setVehicle</span><span class="p">(</span><span class="n">Vehicle</span> <span class="n">vehicle</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">vehicle</span> <span class="o">=</span> <span class="n">vehicle</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="o">...</span>
+
+    <span class="o">//</span> <span class="n">Field</span><span class="err">를</span> <span class="err">통한</span> <span class="n">injection</span>
+    <span class="n">public</span> <span class="k">class</span> <span class="nc">FrogMan</span> <span class="p">{</span>
+        <span class="nd">@Inject</span> <span class="n">private</span> <span class="n">Vehicle</span> <span class="n">vehicle</span><span class="p">;</span>
+        <span class="n">public</span> <span class="n">FrogMan</span><span class="p">(){}</span>
+    <span class="o">...</span></code></pre></div>
+
+<p align="center">[예제 12] Method / Field Injection </p>
+
+<p align="center">출처 : <https://www.ibm.com/developerworks/java/library/j-guice/></p>
+
+<p><br><br>
+4) 세가지 DI Container의 특징과 비교</p>
+
+<ul>
+<li>Spring Container : 스프링은 애플리케이션 코드와 프레임워크 자체와의 결합도(coupling)가 다른 프레임워크에 비해 훨씬 낮다는 것을 특징으로 들수 있습니다. 또한 DI본연의 기능 뿐만이 아니라 유연하고 강력한 컨테이너기능을 쓸 수 있다는 장점이 있습니다. 그렇기 때문에 비교적 구성하기 어렵고 속도가 느려질 수 있다는 단점이 있음에도 불구하고 여전히 가장 많이 선택받는 프레임워크입니다.</li>
+<li>PicoContainer : PicoContainer는 DI기능에 집중한 작은 컨테이너 프레임워크로서, 큰 오버헤드가 없이 단순하게 구성할 수 있습니다. 비교적 작은 프로젝트에 적합합니다.</li>
+<li>Guice : Guice또한 단순하게 구성할수 있으며 Annotation, Generics등의 기능을 적극적으로 사용한다는 특징이 있습니다. 무엇보다 큰 장점은 속도가 빠르다는 것입니다.</li>
+</ul>
+
+<p><br><br>
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/08/yrkim-140805-dicontainer-07.png></img></p></p>
+
+<p>Spring Framework, PicoContainer, Guice에 대한 오늘 날짜(2014.08.05)의 구글 트렌드 검색결과입니다. 역시 Spring Framework가 2005년부터 많은 사랑을 받기 시작한 이후로 지금까지 꾸준한 모습을 보여줍니다. Guice또한 2007년 이후부터 꾸준하게 사용되고 있고, PicoContainer는 두 프레임워크에 비해 관심이 저조함을 알 수 있습니다. 글로벌 트랜드는 Spring에 대한 관심이지속적인 하락세인데, 국내에서는 최근 들어 관심이 폭발하고 있습니다. 아무래도 전자정부 프레임워크의 영향이 크지 않았나 생각해봅니다.</p>
+
+<h2>맺음말</h2>
+
+<p>IoC/DI는 자바의 표준 프로그래밍 모델로서 아주 중요한 요소입니다. 이를 구현하기 위한 여러 프레임워크가 있습니다. DI container기능에만 집중한 프레임워크부터, DI 기능은 물론 복잡한 JEE애플리케이션을 보다 쉽게 구성하도록 돕는 프레임워크까지 다양합니다. 따라서 각 프레임워크의 특성을 이해하고, 목표 시스템에 잘 어울리는 것을 골라야 합니다. 감사합니다.</p>
+
+<h3>참고도서 및 사이트</h3>
+
+<ul>
+<li>이일민 저 / “토비의 스프링 3.1”, 에이콘, 2012</li>
+<li>Inversion of Control (<a href="http://littletrue.egloos.com/4741833">http://littletrue.egloos.com/4741833</a>)</li>
+<li>Comparison between Guice, PicoContainer and Spring (<a href="http://www.christianschenk.org/blog/comparison-between-guice-picocontainer-and-spring">http://www.christianschenk.org/blog/comparison-between-guice-picocontainer-and-spring</a>)</li>
+<li>Google Guice vs. PicoContainer for Dependency Injection (<a href="http://stackoverflow.com/questions/2026016/google-guice-vs-picocontainer-for-dependency-injection">http://stackoverflow.com/questions/2026016/google-guice-vs-picocontainer-for-dependency-injection</a>)</li>
+<li>Wikipedia-의존성 주입 (<a href="http://ko.wikipedia.org/wiki/%EC%9D%98%EC%A1%B4%EC%84%B1_%EC%A3%BC%EC%9E%85">http://ko.wikipedia.org/wiki/%EC%9D%98%EC%A1%B4%EC%84%B1_%EC%A3%BC%EC%9E%85</a>)</li>
+<li>IoC 컨테이너와 의존성 삽입 패턴 (<a href="http://www.javajigi.net/pages/viewpage.action?pageId=68">http://www.javajigi.net/pages/viewpage.action?pageId=68</a>)</li>
+<li>Wikipedia-Google Guice (<a href="http://en.wikipedia.org/wiki/Google_Guice">http://en.wikipedia.org/wiki/Google_Guice</a>)</li>
+<li>PicoContainer (<a href="http://picocontainer.com/introduction.html">http://picocontainer.com/introduction.html</a>)</li>
+<li>Martin Fowler - Inversion of Control Containers and the Dependency Injection pattern (<a href="http://martinfowler.com/articles/injection.html">http://martinfowler.com/articles/injection.html</a>)</li>
+<li>Introduction to Google Guice (<a href="http://www.javabeat.net/introduction-to-google-guice/">http://www.javabeat.net/introduction-to-google-guice/</a>)<br>
+<br></li>
+</ul>
+
+<hr>
+
+<p><em>Posted by 김유리</em></p>
+
+  </div>
+
+  <div class="date">
+    Written on August  6, 2014
+  </div>
+  
+  <br>
+
+  <div>
+    <ul class="tags post-tags cf">
+      <li>Tagged:</li>
+      
+      <li><a href="/theme18/search/?tags=DI">di</a></li>
+      
+      <li><a href="/theme18/search/?tags=Container">container</a></li>
+      
+    </ul>
+  </div>
+  <br>
+
+  
+</article>
+
+<!-- responsive video js -->
+<script src="/js/fluidvids.js"></script>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <p>Nextree Consulting CO., LTD</p>
+                    
+          
+          
+          
+          <a href="http://github.com/wooseok7/theme18"><svg width="40px" height="40px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <path d="M0.336871032,30 C0.336871032,13.4314567 13.5672313,0 29.8877097,0 C46.208188,0 59.4385483,13.4314567 59.4385483,30 C59.4385483,46.5685433 46.208188,60 29.8877097,60 C13.5672313,60 0.336871032,46.5685433 0.336871032,30 Z M0.336871032,30" id="Github" fill="#333333" sketch:type="MSShapeGroup"></path>
+    <path d="M18.2184245,31.9355566 C19.6068506,34.4507902 22.2845295,36.0156764 26.8007287,36.4485173 C26.1561023,36.9365335 25.3817877,37.8630984 25.2749857,38.9342607 C24.4644348,39.4574749 22.8347506,39.62966 21.5674303,39.2310659 C19.7918469,38.6717023 19.1119377,35.1642642 16.4533306,35.6636959 C15.8773626,35.772144 15.9917933,36.1507609 16.489567,36.4722998 C17.3001179,36.9955141 18.0629894,37.6500075 18.6513541,39.04366 C19.1033554,40.113871 20.0531304,42.0259813 23.0569369,42.0259813 C24.2489236,42.0259813 25.0842679,41.8832865 25.0842679,41.8832865 C25.0842679,41.8832865 25.107154,44.6144649 25.107154,45.6761142 C25.107154,46.9004355 23.4507693,47.2457569 23.4507693,47.8346108 C23.4507693,48.067679 23.9990832,48.0895588 24.4396415,48.0895588 C25.3102685,48.0895588 27.1220883,47.3646693 27.1220883,46.0918317 C27.1220883,45.0806012 27.1382993,41.6806599 27.1382993,41.0860982 C27.1382993,39.785673 27.8372803,39.3737607 27.8372803,39.3737607 C27.8372803,39.3737607 27.924057,46.3153869 27.6704022,47.2457569 C27.3728823,48.3397504 26.8360115,48.1846887 26.8360115,48.6727049 C26.8360115,49.3985458 29.0168704,48.8505978 29.7396911,47.2571725 C30.2984945,46.0166791 30.0543756,39.2072834 30.0543756,39.2072834 L30.650369,39.1949165 C30.650369,39.1949165 30.6837446,42.3123222 30.6637192,43.7373675 C30.6427402,45.2128317 30.5426134,47.0792797 31.4208692,47.9592309 C31.9977907,48.5376205 33.868733,49.5526562 33.868733,48.62514 C33.868733,48.0857536 32.8436245,47.6424485 32.8436245,46.1831564 L32.8436245,39.4688905 C33.6618042,39.4688905 33.5387911,41.6768547 33.5387911,41.6768547 L33.5988673,45.7788544 C33.5988673,45.7788544 33.4186389,47.2733446 35.2190156,47.8992991 C35.8541061,48.1209517 37.2139245,48.1808835 37.277815,47.8089257 C37.3417055,47.4360167 35.6405021,46.8814096 35.6252446,45.7236791 C35.6157088,45.0178155 35.6567131,44.6059032 35.6567131,41.5379651 C35.6567131,38.470027 35.2438089,37.336079 33.8048426,36.4323453 C38.2457082,35.9766732 40.9939527,34.880682 42.3337458,31.9450695 C42.4383619,31.9484966 42.8791491,30.5737742 42.8219835,30.5742482 C43.1223642,29.4659853 43.2844744,28.1550957 43.3168964,26.6025764 C43.3092677,22.3930799 41.2895654,20.9042975 40.9014546,20.205093 C41.4736082,17.0182425 40.8060956,15.5675121 40.4961791,15.0699829 C39.3518719,14.6637784 36.5149435,16.1145088 34.9653608,17.1371548 C32.438349,16.3998984 27.0982486,16.4712458 25.0957109,17.3274146 C21.4005522,14.6875608 19.445694,15.0918628 19.445694,15.0918628 C19.445694,15.0918628 18.1821881,17.351197 19.1119377,20.6569598 C17.8961113,22.2028201 16.9902014,23.2968136 16.9902014,26.1963718 C16.9902014,27.8297516 17.1828264,29.2918976 17.6176632,30.5685404 C17.5643577,30.5684093 18.2008493,31.9359777 18.2184245,31.9355566 Z M18.2184245,31.9355566" id="Path" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+    <path d="M59.4385483,30 C59.4385483,46.5685433 46.208188,60 29.8877097,60 C23.8348308,60 18.2069954,58.1525134 13.5216148,54.9827754 L47.3818361,5.81941103 C54.6937341,11.2806503 59.4385483,20.0777973 59.4385483,30 Z M59.4385483,30" id="reflec" fill-opacity="0.08" fill="#000000" sketch:type="MSShapeGroup"></path>
+</svg></a>
+          
+          
+          
+          
+          
+          
+
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>
