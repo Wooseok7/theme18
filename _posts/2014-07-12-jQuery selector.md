@@ -1,8 +1,8 @@
 ---
 layout: post
-title:jQuery : selector를 활용한 그룹표현
-categories: 배움터 - 열공, 일터 - 경험과 노하우
-tag: jQuery selector
+title: jQuery=selector를 활용한 그룹표현
+categories: 배움터-열공 일터-경험과노하우
+tags: jQuery selector
 date:   2014-07-12
 ---
 
@@ -14,13 +14,13 @@ date:   2014-07-12
 우리게 표를 그리는 이유는, 수 없이 많은 데이터를 한눈에 쉽고 빠르게, 보고 분석하기 위해서 입니다. 아래  표에서 이상한 점을 발견 하셨습니까? 아래 표 처럼 모든 데이터를 아무런 정렬, 그룹 없이 있다면, 이 데이터를 이해하는데 시간이 필요하며, 오히려 있으나 마나한 쓸데 없는 데이터가 됩니다.
 
 <br>
-![nextree](http://www.nextree.co.kr/wp-content/uploads/2014/06/dhsong_no_order_by_01.png)
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/06/dhsong_no_order_by_01.png></img></p>
 <p align="center">**<그림1. 정렬, 그룹 적용 안된 표>**
 
 처음 프로젝트를 시작 할 때에는 데이터의 양이 많이 않아 아무런 작업 없이 표현 하였습니다. 하지만, 양이 많아 짐에 따라, 복잡해지고, 빠르게 데이터를 볼 수 없었습니다. 그래서 정렬이 필요했고, 같은 데이터를 포함하고 있는 데이터 들은 그룹을 지어야 했습니다. 어떻게 개발을 해야할지 고민을 한 끝에 아래 처림 한눈에 데이터를 볼 수 있었고, 깔끔하게 표현 할 수 있었습니다.
 
 <br>
-![nextree](http://www.nextree.co.kr/wp-content/uploads/2014/06/dhsong_rowspan_02.png)
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/06/dhsong_rowspan_02.png></img></p>
 <p align="center">**<그림2. 정렬, 그룹 적용 한 표>**
 
 ##2. 개발방법
@@ -137,7 +137,8 @@ date:   2014-07-12
 위 소스의 뜻은 ‘ $requestDates’ 목록에서 첫번째(“:first”)가 아닌(not) 것을 지워라(remove)’ 라는 의미 입니다. 위 코드를 적용하면, rowspan을 적용할 <td>하나만 남고 나머지는 지워지게 되고, rowspan 속성이 적용되어 그룹을 짖게 됩니다. 이와 같이 날짜, 시간도 같은 방법을 적용을 하면 동적으로 rowspan 속성을 적용 할 수 있습니다.
 
 <br>
-![nextree](http://www.nextree.co.kr/wp-content/uploads/2014/06/dhsong_03_2.png)
+<p align="center"><img src= http://www.nextree.co.kr/wp-content/uploads/2014/06/dhsong_03_2.png</img></p>
+
 
 위 소스코드를 적용을 하면, 위 그림에 회색영영의 <td> 태그들이 제거가 되며, 붉은색 영영의 <td>에는 rowspan 속성이 적용이 되어 그룹지어진 테이블을 표현 할 수 있습니다.
 
@@ -145,7 +146,9 @@ date:   2014-07-12
 
 저는 이번 개발을 하면서 자주 사용해서 익숙했던 jQuery 정규표현식 / 자식선택자를 사용했습니다. 하지만 사용하는 법보다 어떻게 활용을 할지가 더 어려웠던 순간 이었습니다. 다른 사람들이 했던 예제를 찾아보거나, 책을 찾아 문제를 해결 했습니다. 비록 기초적인 코드지만, 문제를 해결하는데 있어서 중요한 역할을 했습니다.
 이번 작업을 하면서 한가지 아쉬웠던점은 플러그인으로 만들지 못 해 어디에서나 사용하게 끔 개발을 하지 못 한 점입니다. 만약 다른 테이블에도 적용을 하게 만들으려면 추가적으로 소스를 수정, 추가를 해야하는 경우가 발생 할 것입니다. 추후에 이와 같이 다양하게 사용하는 코드를 작성한다면, 좀 더 넓게 생각하여 누구나, 다양하게 사용 할 수 있는 코드를 만들고 싶습니다.
+<br>  
+
 
 ---
 
-*Posted by 송 대호 in 배움터 - 열공, 일터 - 경험과 노하우 on Jul 12th, 2014*
+*Posted by 송대호*

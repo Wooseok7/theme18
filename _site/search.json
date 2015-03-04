@@ -1,8 +1,8 @@
 [
   
     {
-  "title"    : "Embed YouTube video responsively test",
-  "tags"     : ["embed","youtube","responsive","jekyll","plugin", null],
+  "title"    : "넥스트리 사원팀의 충주호 조정 체험",
+  "tags"     : ["충주호,","트래킹", null],
   "href"     : "/embed-video-responsively/",
   "date"     : {
     "day"   : "24",
@@ -85,8 +85,8 @@
 ,
   
     {
-  "title"    : "Jquery selector",
-  "tags"     : ["jQuery selector", null],
+  "title"    : "jQuery=selector를 활용한 그룹표현",
+  "tags"     : ["jQuery","selector", null],
   "href"     : "/jQuery%20selector/",
   "date"     : {
     "day"   : "12",
@@ -98,7 +98,7 @@
   
     {
   "title"    : "꼭 필요한 리눅스 명령어",
-  "tags"     : ["Linux 명령어", null],
+  "tags"     : ["Linux명령어", null],
   "href"     : "/Linux/",
   "date"     : {
     "day"   : "12",
