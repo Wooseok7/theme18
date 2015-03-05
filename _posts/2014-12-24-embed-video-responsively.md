@@ -1,7 +1,8 @@
 ---
 layout: post
 title: 넥스트리 사원팀의 충주호 조정 체험
-tags: 충주호, 트래킹
+categories: 쉼터–따뜻한 공감 
+tags: Trekking Chungju-lake
 ---
 <iframe width="560" height="315" src="//www.youtube.com/embed/xw4aM6O6k9Y" frameborder="0" allowfullscreen></iframe>
 
